@@ -1,4 +1,6 @@
-export const apiURL = "http://localhost:4200"
+import prod from './prod'
+
+export const apiURL = prod ? 'https://api.elmtree.ro' : 'http://localhost:4200'
 
 export const config = {
   headers: {

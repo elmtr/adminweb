@@ -24,6 +24,7 @@
 		--darkgreen: #054D1B;
 		--darkgreen-transparent: rgba(5, 77, 27, 0.6);
 		--lightgreen: #38E377;
+		--lightgreen-filter: invert(81%) sepia(13%) saturate(2385%) hue-rotate(80deg) brightness(94%) contrast(89%);
 		--lightgreen-transparent: rgba(56, 227, 119, 0.6);
 		--gray: #BDBDBD;
 		--black: #303030;

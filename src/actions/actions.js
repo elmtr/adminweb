@@ -81,7 +81,15 @@ export async function getSubjects(gradeKey) {
       `${apiURL}/v1/admin/subjects?gradeKey=${gradeKey}`,
       tokenConfig(get(token))
     )
-
+    data.sort((a, b) => {
+      if (a.ord > b.ord) {
+        return 1
+      }
+      if (a .ord < b.ord) {
+        return -1
+      }
+      return 0
+    })
     subjects.set(data)
     return data
   } catch (error) {
@@ -90,13 +98,20 @@ export async function getSubjects(gradeKey) {
 }
 
 export async function addSubject(gradeKey, name) {
+  // finding the greatest ord
+  let subjectsValue = get(subjects)
+  let max = 0
+  for (let i in subjectsValue) {
+    if (subjectsValue[i].ord >= max) {
+      max = subjectsValue[i].ord
+    }
+  }
   try {
     const {data} = await axios.post(
       `${apiURL}/v1/admin/subjects?gradeKey=${gradeKey}`,
-      {name},
+      {name, ord: max + 1},
       tokenConfig(get(token))
     )
-    let subjectsValue = get(subjects)
     subjectsValue.push(data)
     subjects.set(subjectsValue)
   } catch (error) {

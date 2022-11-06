@@ -27,7 +27,6 @@
 </script>
 
 <div id="container">
-  <HeaderBack />
 
   <Days {day} />
 </div>
@@ -90,12 +89,12 @@
 
   #container {
     width: 100%;
-    background: var(--white);
+    background: var(--offwhite);
     position: fixed;
     z-index: 10;
   }
 
   #spacing {
-    height: 150px;
+    height: 100px;
   }
 </style>

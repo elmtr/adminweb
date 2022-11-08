@@ -6,8 +6,6 @@
 
 	let gradeNumber
 	let gradeLetter
-	let intervalStart
-	let intervalEnd
 
 	onMount(() => {
 		$teacher = {}
@@ -16,16 +14,14 @@
 
 <input type="text" bind:value={gradeNumber} placeholder="grade number"><br>
 <input type="text" bind:value={gradeLetter} placeholder="grade letter"><br>
-<input type="text" bind:value={intervalStart} placeholder="intervals start"><br>
-<input type="text" bind:value={intervalEnd} placeholder="intervals end"><br>
+<!-- <input type="text" bind:value={intervalStart} placeholder="intervals start"><br>
+<input type="text" bind:value={intervalEnd} placeholder="intervals end"><br> -->
 
 
 <input type="submit" on:click={ async () => {
-  await addGrade(gradeNumber, gradeLetter, intervalStart, intervalEnd)
+  await addGrade(gradeNumber, gradeLetter)
   gradeNumber = ""
 	gradeLetter = ""
-	intervalStart = ""
-	intervalEnd = ""
 }} value="adauga clasa">
 
 <br>

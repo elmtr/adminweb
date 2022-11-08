@@ -41,6 +41,14 @@ export async function getGrades() {
       `${apiURL}/v1/admin/grades`,
       tokenConfig(get(token))
     )
+    data.sort((a, b) => {
+      if (a.gradeNumber < b.gradeNumber) {
+        return -1
+      } 
+      if (a.gradeNumber > b.gradeNumber) {
+        return 1
+      }
+    })
     grades.set(data)
   } catch (error) {
     console.log(error.response.data.message)
@@ -50,12 +58,10 @@ export async function getGrades() {
 export async function addGrade(
   gradeNumber, 
   gradeLetter, 
-  intervalStart, 
-  intervalEnd
+
 ) {
   gradeNumber = Number(gradeNumber)
   gradeLetter = gradeLetter.toUpperCase()
-  let intervals = intervalStart + "-" + intervalEnd
   let d = new Date()
   let yearFrom = d.getFullYear()
   let yearTo = d.getFullYear() + 1
@@ -63,7 +69,7 @@ export async function addGrade(
   try {
     const {data} = await axios.post(
       `${apiURL}/v1/admin/grades`,
-      {gradeNumber, gradeLetter, intervals, yearFrom, yearTo},
+      {gradeNumber, gradeLetter, yearFrom, yearTo},
       tokenConfig(get(token))
     )
     let gradesValue = get(grades)
@@ -182,7 +188,21 @@ export async function addPeriod(
   name,
   room,
 ) {
-  interval = "" + interval
+  let intervals = {
+    am1: 1,
+    am2: 2,
+    am3: 3,
+    am4: 4,
+    am5: 5,
+    am6: 6,
+    pm1: 7,
+    pm2: 8,
+    pm3: 9,
+    pm4: 10,
+    pm5: 11,
+    pm6: 12
+  }
+  interval = "" + intervals[interval]
   day = "" + day
 
   try {

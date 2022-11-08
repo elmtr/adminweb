@@ -16,6 +16,22 @@
 
   let intervals = [1,2,3,4,5,6,7,8,9,10,11,12]
 
+  let schoolIntervals = [
+    '',
+    'am1',
+    'am2',
+    'am3',
+    'am4',
+    'am5',
+    'am6',
+    'pm1',
+    'pm2',
+    'pm3',
+    'pm4',
+    'pm5',
+    'pm6'
+  ]
+
   let day = writable(1);
 
   export let params
@@ -38,7 +54,7 @@
     {#each intervals as interval}
       {#if $timetable[$day][interval].length > 0}
         {#each $timetable[$day][interval] as period}
-          {period.subject.name} - {period.interval} in {period.room} - 
+          {period.subject.name} - {schoolIntervals[period.interval]} in {period.room} - 
           <span style="color: var(--red)" on:click={() => {
             $showPeriodDelete = !$showPeriodDelete
             $selPeriod = period
@@ -59,9 +75,9 @@
 <DeletePeriod/>
 <ModifyPeriod {params} />
 
+<input type="text" placeholder="intervalul" bind:value={interval}>
 <input type="text" placeholder="numele materiei" bind:value={name}>
 <input type="text" placeholder="sala" bind:value={room}>
-<input type="text" placeholder="intervalul" bind:value={interval}>
 <input type="submit" value="adauga ora" on:click={ async () => {
   await addPeriod(
     params.gradeKey,
